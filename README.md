@@ -1,1 +1,2 @@
-# SUML-proj
+# SUML
+Projekt na SUML
