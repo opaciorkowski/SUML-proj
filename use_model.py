@@ -4,14 +4,36 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Specify the directory used during training
-trainpath = 'Vegetable Images/train'
+# # Specify the directory used during training
+# trainpath = 'Vegetable Images/train'
 
-# Get class labels in alphabetical order
-labels = sorted(os.listdir(trainpath))
+# # Get class labels in alphabetical order
+# labels = sorted(os.listdir(trainpath))
 
-# Create a mapping from index to class name
-labels_mapping = {index: label for index, label in enumerate(labels)}
+# # Create a mapping from index to class name
+# labels_mapping = {index: label for index, label in enumerate(labels)}
+# print("Labels Mapping:", labels_mapping)
+# Static Labels Mapping
+
+labels_mapping = {
+    0: 'Bean',
+    1: 'Bitter_Gourd',
+    2: 'Bottle_Gourd',
+    3: 'Brinjal',
+    4: 'Broccoli',
+    5: 'Cabbage',
+    6: 'Capsicum',
+    7: 'Carrot',
+    8: 'Cauliflower',
+    9: 'Cucumber',
+    10: 'Papaya',
+    11: 'Potato',
+    12: 'Pumpkin',
+    13: 'Radish',
+    14: 'Tomato'
+}
+
+# Print to confirm the mapping is set
 print("Labels Mapping:", labels_mapping)
 
 # Load the saved model
@@ -43,7 +65,7 @@ predicted_class = np.argmax(predictions, axis=1)[0]
 confidence = np.max(predictions)
 
 # Map the predicted class index to the class label
-predicted_label = labels[predicted_class]
+predicted_label = labels_mapping[predicted_class]
 
 print(f"Predicted Class: {predicted_label}")
 print(f"Confidence: {confidence:.2f}")
