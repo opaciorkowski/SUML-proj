@@ -1,20 +1,11 @@
+import streamlit as st
 from tensorflow.keras.models import load_model
-import os
 import cv2
 import numpy as np
+from PIL import Image
 import matplotlib.pyplot as plt
 
-# # Specify the directory used during training
-# trainpath = 'Vegetable Images/train'
-
-# # Get class labels in alphabetical order
-# labels = sorted(os.listdir(trainpath))
-
-# # Create a mapping from index to class name
-# labels_mapping = {index: label for index, label in enumerate(labels)}
-# print("Labels Mapping:", labels_mapping)
 # Static Labels Mapping
-
 labels_mapping = {
     0: 'Bean',
     1: 'Bitter_Gourd',
@@ -33,46 +24,46 @@ labels_mapping = {
     14: 'Tomato'
 }
 
-# Print to confirm the mapping is set
-print("Labels Mapping:", labels_mapping)
-
 # Load the saved model
-model = load_model("Vegetables_model.keras")
+@st.cache_resource
+def load_vegetable_model():
+    model = load_model("Vegetables_model.keras")
+    return model
 
-# Path to your image
-image_path = "Tomato_je.jpg"
+model = load_vegetable_model()
 
-# Load the image using OpenCV
-img = cv2.imread(image_path)
+# Streamlit app configuration
+st.title("Vegetable Classifier")
+st.write("Upload an image of a vegetable, and the model will predict its class.")
 
-# Resize the image to 100x100
-img_resized = cv2.resize(img, (100, 100))
+# File uploader
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-# Convert BGR to RGB (if using OpenCV)
-img_resized = cv2.cvtColor(img_resized, cv2.COLOR_BGR2RGB)
+if uploaded_file is not None:
+    # Display the uploaded image
+    st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+    st.write("")
+    st.write("Processing...")
 
-# Normalize the image
-img_normalized = img_resized / 255.0
+    # Read and preprocess the image
+    img = Image.open(uploaded_file).convert("RGB")
+    img_resized = img.resize((100, 100))  # Resize to model's input size
+    img_array = np.array(img_resized) / 255.0  # Normalize the image
+    img_preprocessed = np.expand_dims(img_array, axis=0)  # Add batch dimension
 
-# Add a batch dimension to the image
-img_preprocessed = np.expand_dims(img_normalized, axis=0)
+    # Predict the class probabilities
+    predictions = model.predict(img_preprocessed)
 
-# Predict the class probabilities
-predictions = model.predict(img_preprocessed)
+    # Get the class with the highest probability
+    predicted_class = np.argmax(predictions, axis=1)[0]
+    confidence = np.max(predictions)
 
-# Get the class with the highest probability
-predicted_class = np.argmax(predictions, axis=1)[0]
-confidence = np.max(predictions)
+    # Map the predicted class index to the class label
+    predicted_label = labels_mapping[predicted_class]
 
-# Map the predicted class index to the class label
-predicted_label = labels_mapping[predicted_class]
+    # Display the prediction
+    st.write(f"**Predicted Class:** {predicted_label}")
+    st.write(f"**Confidence:** {confidence:.2f}")
 
-print(f"Predicted Class: {predicted_label}")
-print(f"Confidence: {confidence:.2f}")
-
-plt.imshow(img_resized)
-plt.title(f"Prediction: {predicted_label} (Confidence: {confidence:.2f})")
-plt.axis('off')
-plt.show()
-
-
+    # Show the uploaded image with prediction
+    st.image(img_resized, caption=f"Prediction: {predicted_label} (Confidence: {confidence:.2f})", use_container_width=True)
