@@ -8,3 +8,5 @@ scipy
 seaborn
 scikit-learn
 opencv-python
+streamlit
+streamlit-extras
