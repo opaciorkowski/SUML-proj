@@ -10,3 +10,4 @@ st.sidebar.header("Welcome Page")
 st.title("Welcome to Vegetable Classifier!")
 
 #st.sidebar.info("Select a page above")
+#TODO: add info

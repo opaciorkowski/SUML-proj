@@ -56,6 +56,7 @@ fade_text_style()
 st.title("Recipes")
 st.write("Check out our recipes!")
 
+#TODO: add functionality
 # Define tiles
 tiles = [
     {"title": "Page 1", "image": "https://via.placeholder.com/150", "description": "This is a short description.", "page": "Page1"},

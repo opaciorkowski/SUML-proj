@@ -9,7 +9,7 @@ st.title("Vegetable Classifier")
 st.write("Upload an image of a vegetable, and the model will predict its class.")
 
 st.sidebar.header("Classifier")
-
+#TODO: add functionality
 # File uploader
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
