@@ -53,7 +53,7 @@ def fade_text_style():
 fade_text_style()
 
 # Page title
-st.title("Recipes")
+st.header("Recipes", divider="red")
 st.write("Check out our recipes!")
 
 #TODO: add functionality

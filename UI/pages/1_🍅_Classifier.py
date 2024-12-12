@@ -5,7 +5,7 @@ st.set_page_config(
     page_icon="🍅",
 )
 
-st.title("Vegetable Classifier")
+st.header("Vegetable Classifier", divider="red")
 st.write("Upload an image of a vegetable, and the model will predict its class.")
 
 st.sidebar.header("Classifier")

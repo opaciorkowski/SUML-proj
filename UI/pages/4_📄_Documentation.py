@@ -5,7 +5,7 @@ st.set_page_config(
     page_icon="🍅",
 )
 
-st.title("Documentation")
+st.header("Documentation", divider="red")
 st.write("Read")
 
 st.sidebar.header("Documentation")
