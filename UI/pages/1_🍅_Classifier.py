@@ -64,7 +64,6 @@ def load_vegetable_model():
 
 model = load_vegetable_model()
 
-#TODO: add functionality
 # File uploader
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
@@ -97,4 +96,30 @@ if uploaded_file is not None:
     # Show the uploaded image with prediction
     st.image(img_resized, caption=f"Prediction: {predicted_label} (Confidence: {confidence:.2f})", use_container_width=True)
 
+
+if "veg_list" not in st.session_state:
+    st.session_state["veg_list"] = []
+
+
+col1, col2, col3, col4= st.columns([2, 1, 1, 2])
+message_container = st.container()
+
+with col2:
+    but1 = st.button("Add item")
+    if but1:
+        if uploaded_file is None:
+            with message_container:
+                st.error("Please make a prediction first!")
+        else: 
+            st.session_state["veg_list"].append(predicted_label)
+            with message_container:
+                st.success(f"{predicted_label} added to list!")
+with col3:
+    but2 = st.button("Find recipe")
+    if but2:
+        if len(st.session_state["veg_list"]) == 0:
+            with message_container:
+                st.error("Please add at least 1 item!")
+        else:
+            st.write(st.session_state["veg_list"]) #TODO: Change to looking for a recipe
 
