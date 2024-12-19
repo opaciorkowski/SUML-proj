@@ -83,4 +83,3 @@ st.markdown(f"""
             You can read our documentation in the
             <a href="{docs_page}" target="_self">📄Documentation tab</a>.
             """, unsafe_allow_html=True)
-#TODO: add info
