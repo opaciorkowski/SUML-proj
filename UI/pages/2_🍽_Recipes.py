@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.colored_header import colored_header
 import base64
+from recipe import Recipe
 
 st.set_page_config(
     page_title="Recipes",
@@ -36,10 +37,10 @@ def fade_text_style():
     st.markdown("""
     <style>
     .tile {
-        height: 300px; /* Fixed height */
+        height: 300px;
         border: 1px solid #ccc;
         border-radius: 8px;
-        padding: 10px;
+        padding: 4px;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease-in-out;
@@ -54,15 +55,6 @@ def fade_text_style():
         overflow: hidden;
         text-overflow: ellipsis;
         position: relative;
-    }
-    .description::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 20px;
-        background: linear-gradient(to bottom, transparent, white);
     }
     .clickable {
         text-decoration: none;
@@ -79,12 +71,14 @@ st.header("Recipes", divider="red")
 st.write("Check out our recipes!")
 
 #TODO: add functionality
+recipes = Recipe.create_sample_recipes()
+
+
 # Define tiles
-tiles = [
-    {"title": "Page 1", "image": "https://via.placeholder.com/150", "description": "This is a short description.", "page": "Page1"},
-    {"title": "Page 2", "image": "https://via.placeholder.com/150", "description": "This is a much longer description that might get truncated if it exceeds the maximum height of the tile description box.", "page": "Page2"},
-    {"title": "Page 3", "image": "https://via.placeholder.com/150", "description": "Another description with moderate length for this page.", "page": "Page3"}
-]
+tiles = []
+for rec in recipes:
+    tiles.append({"title": rec.title, "image": rec.image, "description": rec.description, "page": None})
+
 
 # Grid layout
 cols = st.columns(3) 
