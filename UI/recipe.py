@@ -1,3 +1,5 @@
+import streamlit as st
+
 class Recipe:
     def __init__(self, title, description, image, tags):
         self.title = title
@@ -11,28 +13,25 @@ class Recipe:
     def add_tag(self, new_tag):
         self.tags.append(new_tag)
 
-    def create_sample_recipes():
-        recipes = []
-
-        rec1 = Recipe("Everyday Salad", 
+    def load_recipes():
+        if "recipes" not in st.session_state:
+            #TODO Replace this with loading from a db or file
+            st.session_state["recipes"] = [
+            Recipe("Everyday Salad (tomato, cucumber, onion, salad)", 
                     "Simple salad for everyday, great with every meal!",
                     "https://via.placeholder.com/150",
                     ["tomato", "cucumber", "onion", "salad"]
-                    )
-        recipes.append(rec1)
-
-        rec2 = Recipe("Everyday Salad", 
+            ),
+            Recipe("Everyday Salad (spinach)", 
                     "Simple salad for everyday, great with every meal!",
                     "https://via.placeholder.com/150",
                     ["spinach"]
-                    )
-        recipes.append(rec2)
-
-        rec3 = Recipe("Everyday Salad", 
+            ),
+            Recipe("Everyday Salad (capsicum)", 
                     "Simple salad for everyday, great with every meal!",
                     "https://via.placeholder.com/150",
                     ["capsicum"]
-                    )
-        recipes.append(rec3)
-
-        return recipes
+            )
+        ]
+        if "sorted_recipes" not in st.session_state:
+            st.session_state["sorted_recipes"] = st.session_state["recipes"]

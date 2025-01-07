@@ -1,11 +1,8 @@
 import streamlit as st
 import base64
 from tensorflow.keras.models import load_model
-import cv2
 import numpy as np
 from PIL import Image
-import matplotlib.pyplot as plt
-from recipe import Recipe
 
 st.set_page_config(
     page_title="Classifier",
@@ -40,7 +37,7 @@ set_png_as_page_bg('img/veg_background4.jpg')
 
 def search_for_recipe(veg_list):
     veg_list = [veg.lower() for veg in veg_list]
-    recipes = Recipe.create_sample_recipes()
+    recipes = st.session_state["recipes"]
     scores = {}
 
     for rec in recipes:
@@ -137,10 +134,5 @@ with col3:
             with message_container:
                 st.error("Please add at least 1 item!")
         else:
-            result = search_for_recipe(st.session_state["veg_list"])
-            print(result)
-            for r in result:
-                st.write(r.title)
-                for tag in r.tags:
-                    st.write(tag)
-#TODO add switching to recipes page with recipes sorted by score
+            st.session_state["sorted_recipes"] = search_for_recipe(st.session_state["veg_list"])
+            st.switch_page("pages/2_🍽_Recipes.py")

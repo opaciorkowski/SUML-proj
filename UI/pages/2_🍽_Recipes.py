@@ -70,8 +70,8 @@ fade_text_style()
 st.header("Recipes", divider="red")
 st.write("Check out our recipes!")
 
-#TODO: add functionality
-recipes = Recipe.create_sample_recipes()
+Recipe.load_recipes()
+recipes = st.session_state["sorted_recipes"]
 
 
 # Define tiles

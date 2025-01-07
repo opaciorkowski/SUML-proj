@@ -10,6 +10,7 @@ st.sidebar.header("Welcome Page")
 
 st.title("Welcome to Vegetable Classifier!🍅")
 
+
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
