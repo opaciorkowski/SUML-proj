@@ -17,17 +17,17 @@ class Recipe:
         if "recipes" not in st.session_state:
             #TODO Replace this with loading from a db or file
             st.session_state["recipes"] = [
-            Recipe("Everyday Salad (tomato, cucumber, onion, salad)", 
+            Recipe("Everyday Salad", 
                     "Simple salad for everyday, great with every meal!",
                     "https://via.placeholder.com/150",
                     ["tomato", "cucumber", "onion", "salad"]
             ),
-            Recipe("Everyday Salad (spinach)", 
+            Recipe("Everyday Salad", 
                     "Simple salad for everyday, great with every meal!",
                     "https://via.placeholder.com/150",
                     ["spinach"]
             ),
-            Recipe("Everyday Salad (capsicum)", 
+            Recipe("Everyday Salad", 
                     "Simple salad for everyday, great with every meal!",
                     "https://via.placeholder.com/150",
                     ["capsicum"]

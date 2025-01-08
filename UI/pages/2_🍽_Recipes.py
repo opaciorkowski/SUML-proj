@@ -32,40 +32,6 @@ def set_png_as_page_bg(png_file):
 
 set_png_as_page_bg('img/veg_background4.jpg')
 
-# Helper function for text fading
-def fade_text_style():
-    st.markdown("""
-    <style>
-    .tile {
-        height: 300px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 4px;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
-        overflow: hidden;
-        position: relative;
-    }
-    .tile:hover {
-        transform: scale(1.05);
-    }
-    .description {
-        max-height: 60px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        position: relative;
-    }
-    .clickable {
-        text-decoration: none;
-        color: inherit;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Add styles
-fade_text_style()
-
 # Page title
 st.header("Recipes", divider="red")
 st.write("Check out our recipes!")
@@ -73,37 +39,39 @@ st.write("Check out our recipes!")
 Recipe.load_recipes()
 recipes = st.session_state["sorted_recipes"]
 
+if "selected_recipe" not in st.session_state:
+    st.session_state["selected_recipe"] = None
 
-# Define tiles
-tiles = []
-for rec in recipes:
-    tiles.append({"title": rec.title, "image": rec.image, "description": rec.description, "page": None})
+@st.dialog("Recipe details", width="large")
+def open_recipe():
+    selected = st.session_state["selected_recipe"]
+    st.header(selected.title)
+    st.image(selected.image, caption=selected.title, use_container_width=True)
+    st.write("### Description")
+    st.write(selected.description)
+    st.write("### Tags")
+    st.write(", ".join(selected.tags))
+    st.write("### Ingredients")
+    st.write("- Example Ingredient 1\n- Example Ingredient 2\n- Example Ingredient 3")
+    st.write("### Instructions")
+    st.write("1. Step one\n2. Step two\n3. Step three")
+    st.session_state["selected_recipe"] = None
 
+# Recipe layout
+for i, recipe in enumerate(recipes):
+    with st.container(border=True):
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            st.image(recipe.image, use_container_width=True)
+        with col2:
+            st.subheader(recipe.title)
+            st.write(recipe.description)
+            st.write("Tags: " + ", ".join(recipe.tags))
 
-# Grid layout
-cols = st.columns(3) 
-for i, tile in enumerate(tiles):
-    with cols[i % 3]:
-        # Tile Content
-        st.markdown(f"""
-        <div class="tile">
-            <a href="?page={tile['page']}" class="clickable">
-                <img src="{tile['image']}" alt="{tile['title']}" style="width: 100%; border-radius: 5px;">
-            </a>
-            <h4>{tile['title']}</h4>
-            <div class="description">{tile['description']}</div>
-        </div>
-        """, unsafe_allow_html=True)
+            # Button to view recipe details
+            if st.button("View Details", key=f"view_{i}"):
+                st.session_state["selected_recipe"] = recipe
+                open_recipe()
 
-# Subpage Navigation
-query_params = st.query_params
-if "page" in query_params:
-    page = query_params["page"][0]
-    if page == "Page1":
-        st.write("Welcome to Page 1!")
-    elif page == "Page2":
-        st.write("Welcome to Page 2!")
-    elif page == "Page3":
-        st.write("Welcome to Page 3!")
 
 
