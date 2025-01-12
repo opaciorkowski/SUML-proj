@@ -2,13 +2,13 @@ import streamlit as st
 import base64
 
 st.set_page_config(
-    page_title="Welcome to Vegetable Classifier",
+    page_title="Welcome to Vegetable and Fruit Classifier",
     page_icon="🍅",
 )
 
 st.sidebar.header("Welcome Page")
 
-st.title("Welcome to Vegetable Classifier!🍅")
+st.title("Welcome to Vegetable and Fruit Classifier!🍅")
 
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
@@ -22,9 +22,9 @@ def set_png_as_page_bg(png_file):
     .stApp {
     background-image: url("data:image/png;base64,%s");
     background-size: cover;
-    background-position: center; /* Keeps the image centered */
-    background-attachment: fixed; /* Prevents image from zooming in or moving with scroll */
-    background-repeat: no-repeat; /* Avoids repeating the image */
+    background-position: center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat; 
     min-height: 100vh; 
     }
     </style>
