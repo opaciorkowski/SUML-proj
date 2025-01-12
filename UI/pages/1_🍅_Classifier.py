@@ -9,8 +9,8 @@ st.set_page_config(
     page_icon="🍅",
 )
 
-st.header("Vegetable Classifier", divider="red")
-st.write("Upload an image of a vegetable, and the model will predict its class.")
+st.header("Vegetable and Fruit Classifier", divider="red")
+st.write("Upload an image of a vegetable or fruit, and the model will predict its class.")
 
 st.sidebar.header("Classifier")
 
@@ -36,18 +36,20 @@ def set_png_as_page_bg(png_file):
 set_png_as_page_bg('img/veg_background4.jpg')
 
 def search_for_recipe(veg_list):
-    veg_list = [veg.lower() for veg in veg_list]
-    recipes = st.session_state["recipes"]
-    scores = {}
+    veg_list = [veg.lower() for veg in veg_list]  
+    recipes = Recipe.create_sample_recipes()  
+    matching_recipes = []  # List of matching recipes
 
     for rec in recipes:
-        scores[rec] = 0
         for tag in rec.tags:
-            if tag in veg_list:
-                scores[rec] += 1
+            if tag.lower() in veg_list:  
+                matching_recipes.append(rec)
+                break  
 
-    result = dict(sorted(scores.items(), key=lambda item: item[1], reverse=True))
-    return result
+    if matching_recipes:  # if there are matching recipes
+        return matching_recipes
+    else:  # if there are no matching recipes
+        return None
 
 
 # Static Labels Mapping
@@ -58,15 +60,15 @@ labels_mapping = {
     3: 'Brinjal',
     4: 'Broccoli',
     5: 'Cabbage',
-    6: 'Capsicum',
-    7: 'Carrot',
+    6: 'Tomato',
+    7: 'Capsicum',
     8: 'Cauliflower',
     9: 'Cucumber',
     10: 'Papaya',
     11: 'Potato',
     12: 'Pumpkin',
     13: 'Radish',
-    14: 'Tomato'
+    14: 'Carrot'
 }
 
 # Load the saved model
@@ -81,16 +83,14 @@ model = load_vegetable_model()
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Display the uploaded image
     st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
     st.write("")
-    st.write("Processing...")
 
     # Read and preprocess the image
     img = Image.open(uploaded_file).convert("RGB")
-    img_resized = img.resize((100, 100))  # Resize to model's input size
-    img_array = np.array(img_resized) / 255.0  # Normalize the image
-    img_preprocessed = np.expand_dims(img_array, axis=0)  # Add batch dimension
+    img_resized = img.resize((100, 100)) 
+    img_array = np.array(img_resized) / 255.0  
+    img_preprocessed = np.expand_dims(img_array, axis=0) 
 
     # Predict the class probabilities
     predictions = model.predict(img_preprocessed)
@@ -117,6 +117,7 @@ if "veg_list" not in st.session_state:
 col1, col2, col3, col4= st.columns([2, 1, 1, 2])
 message_container = st.container()
 
+#UI logic
 with col2:
     but1 = st.button("Add item")
     if but1:
@@ -134,5 +135,10 @@ with col3:
             with message_container:
                 st.error("Please add at least 1 item!")
         else:
-            st.session_state["sorted_recipes"] = search_for_recipe(st.session_state["veg_list"])
-            st.switch_page("pages/2_🍽_Recipes.py")
+            found_recipes = search_for_recipe(st.session_state["veg_list"])
+            if found_recipes is None:
+                with message_container:
+                    st.error("Sorry, there are no recipes matching your ingredients list.")
+            else:
+                st.session_state["sorted_recipes"] = found_recipes
+                st.switch_page("pages/2_🍽_Recipes.py")

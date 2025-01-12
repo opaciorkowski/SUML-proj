@@ -1,13 +1,7 @@
 import streamlit as st
-from streamlit_extras.switch_page_button import switch_page
-from streamlit_extras.colored_header import colored_header
-import base64
 from recipe import Recipe
 
-st.set_page_config(
-    page_title="Recipes",
-    page_icon="🍅",
-)
+st.set_page_config(page_title="Recipes", page_icon="🍅", layout="wide")
 
 st.sidebar.header("Recipes")
 
@@ -72,6 +66,3 @@ for i, recipe in enumerate(recipes):
             if st.button("View Details", key=f"view_{i}"):
                 st.session_state["selected_recipe"] = recipe
                 open_recipe()
-
-
-
