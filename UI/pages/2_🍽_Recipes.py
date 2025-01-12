@@ -1,4 +1,5 @@
 import streamlit as st
+import base64
 from recipe import Recipe
 
 st.set_page_config(page_title="Recipes", page_icon="🍅", layout="wide")
@@ -40,7 +41,7 @@ if "selected_recipe" not in st.session_state:
 def open_recipe():
     selected = st.session_state["selected_recipe"]
     st.header(selected.title)
-    st.image(selected.image, caption=selected.title, use_container_width=True)
+    st.image(selected.image_path, caption=selected.title, use_container_width=True)
     st.write("### Description")
     st.write(selected.description)
     st.write("### Tags")
@@ -56,7 +57,7 @@ for i, recipe in enumerate(recipes):
     with st.container(border=True):
         col1, col2 = st.columns([1, 4])
         with col1:
-            st.image(recipe.image, use_container_width=True)
+            st.image(recipe.image_path, use_container_width=True)
         with col2:
             st.subheader(recipe.title)
             st.write(recipe.description)

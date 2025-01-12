@@ -13,13 +13,6 @@ class Recipe:
     def add_tag(self, new_tag):
         self.tags.append(new_tag)
 
-    def load_recipes():
-        if "recipes" not in st.session_state:
-            #TODO Replace this with loading from a db or file
-            st.session_state["recipes"] = create_sample_recipes()
-        if "sorted_recipes" not in st.session_state:
-            st.session_state["sorted_recipes"] = st.session_state["recipes"]
-            
     @staticmethod
     def create_sample_recipes():
         recipes = []
@@ -73,3 +66,10 @@ class Recipe:
         recipes.append(rec6)
 
         return recipes
+    
+    def load_recipes():
+        if "recipes" not in st.session_state:
+            st.session_state["recipes"] = Recipe.create_sample_recipes()
+        if "sorted_recipes" not in st.session_state:
+            st.session_state["sorted_recipes"] = st.session_state["recipes"]
+            

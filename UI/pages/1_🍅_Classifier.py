@@ -3,6 +3,7 @@ import base64
 from tensorflow.keras.models import load_model
 import numpy as np
 from PIL import Image
+from recipe import Recipe
 
 st.set_page_config(
     page_title="Classifier",
@@ -35,9 +36,11 @@ def set_png_as_page_bg(png_file):
 
 set_png_as_page_bg('img/veg_background4.jpg')
 
+Recipe.load_recipes() 
+
 def search_for_recipe(veg_list):
     veg_list = [veg.lower() for veg in veg_list]  
-    recipes = Recipe.create_sample_recipes()  
+    recipes = st.session_state["recipes"]
     matching_recipes = []  # List of matching recipes
 
     for rec in recipes:
