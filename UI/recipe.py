@@ -23,7 +23,7 @@ class Recipe:
             "Broccoli Stir-Fry",
             "A quick and healthy recipe for stir-fried broccoli with garlic and spices. Perfect as a side dish for dinner.",
             "img/stir-fry.jpg",  
-            ["Broccoli", "capsicum"],
+            ["Broccoli", "Capsicum"],
             ["For the sauce: water, soy sauce, honey, minced garlic, fresh ginger, black pepper, cornstarch",
              "olive oil", "broccoli", "cremini mushrooms", "bell pepper", "cooked rice"],
             ["Make the stir fry sauce by mixing together all of the sauce ingredients in a small bowl.",
