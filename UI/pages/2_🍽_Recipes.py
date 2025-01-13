@@ -59,7 +59,7 @@ for i, recipe in enumerate(recipes):
     with st.container(border=True):
         col1, col2 = st.columns([1, 4])
         with col1:
-            st.image(recipe.image_path, use_container_width=True)
+            st.image(recipe.image_path, use_container_width=False)
         with col2:
             st.subheader(recipe.title)
             st.write(recipe.description)
