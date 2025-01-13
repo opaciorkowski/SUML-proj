@@ -25,7 +25,7 @@ def set_png_as_page_bg(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
     return
 
-set_png_as_page_bg('img/veg_background4.jpg')
+set_png_as_page_bg('UI/img/veg_background4.jpg')
 
 # Page title
 st.header("Recipes", divider="red")
@@ -41,7 +41,7 @@ if "selected_recipe" not in st.session_state:
 def open_recipe():
     selected = st.session_state["selected_recipe"]
     st.header(selected.title)
-    st.image(selected.image_path, caption=selected.title, use_container_width=True)
+    st.image("UI/"+selected.image_path, caption=selected.title, use_container_width=True)
     st.write("### Description")
     st.write(selected.description)
     st.write("### Tags")
@@ -59,7 +59,7 @@ for i, recipe in enumerate(recipes):
     with st.container(border=True):
         col1, col2 = st.columns([1, 4])
         with col1:
-            st.image(recipe.image_path, use_container_width=False)
+            st.image("UI/"+recipe.image_path, use_container_width=False)
         with col2:
             st.subheader(recipe.title)
             st.write(recipe.description)

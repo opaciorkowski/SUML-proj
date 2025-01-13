@@ -33,7 +33,7 @@ def set_png_as_page_bg(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
     return
 
-set_png_as_page_bg('img/veg_background4.jpg')
+set_png_as_page_bg('UI/img/veg_background4.jpg')
 
 
 def make_circle(image_path):
@@ -48,14 +48,14 @@ def make_circle(image_path):
 
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    circular_image = make_circle("img/Oskar.png")
+    circular_image = make_circle("UI/img/Oskar.png")
     st.image(circular_image, caption="Oskar Paciorkowski", use_container_width=True)
 
 with col2:
-    circular_image = make_circle("img/Kuba.jpg")
+    circular_image = make_circle("UI/img/Kuba.jpg")
     st.image(circular_image, caption="Jakub Wójcik", use_container_width=True)
 
 with col3:
-    circular_image = make_circle("img/Kinga.png")
+    circular_image = make_circle("UI/img/Kinga.png")
     st.image(circular_image, caption="Kinga Mendyk", use_container_width=True)
 
