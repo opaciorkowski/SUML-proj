@@ -117,7 +117,20 @@ if "veg_list" not in st.session_state:
     st.session_state["veg_list"] = []
 
 
-col1, col2, col3, col4= st.columns([2, 1, 1, 2])
+@st.dialog("Item list", width="small")
+def show_list():
+    for i, veg in enumerate(st.session_state["veg_list"]):
+        with st.container():
+            col1, col2 = st.columns([4, 2])
+            with col1:
+                st.write(f"- {veg}")
+            with col2:
+                but = st.button(f"Remove", key=f"remove_{i}")
+                if but:
+                    st.session_state["veg_list"].pop(i - 1)
+                    st.rerun()
+
+col1, col2, col3, col4, col5 = st.columns([2, 1, 1, 1, 2])
 message_container = st.container()
 
 #UI logic
@@ -128,12 +141,26 @@ with col2:
             with message_container:
                 st.error("Please make a prediction first!")
         else: 
-            st.session_state["veg_list"].append(predicted_label)
-            with message_container:
-                st.success(f"{predicted_label} added to list!")
+            if predicted_label in st.session_state["veg_list"]:
+                with message_container:
+                    st.warning(f"{predicted_label} is already in list.")
+            else:
+                st.session_state["veg_list"].append(predicted_label)
+                with message_container:
+                    st.success(f"{predicted_label} added to list!")
+
 with col3:
-    but2 = st.button("Find recipe")
+    but2 = st.button("View list")
     if but2:
+        if len(st.session_state["veg_list"]) == 0:
+            with message_container:
+                st.error("Please add at least 1 item!")
+        else: 
+            show_list()   
+
+with col4:
+    but3 = st.button("Find recipe")
+    if but3:
         if len(st.session_state["veg_list"]) == 0:
             with message_container:
                 st.error("Please add at least 1 item!")
