@@ -18,7 +18,7 @@ Aplikacja została wdrożona online. Aby z niej skorzystać:
 
 1. Otwórz przeglądarkę internetową.
 2. Przejdź do aplikacji pod adresem:  
-   👉 [Link do aplikacji](https://twoj-link-do-streamlit.com)
+   👉 [Link do aplikacji](https://veggies.streamlit.app/)
 3. Załaduj zdjęcie warzywa lub owocu, aby uzyskać predykcję.
 4. Dodaj rozpoznane składniki do listy i znajdź odpowiednie przepisy kulinarne.
 
