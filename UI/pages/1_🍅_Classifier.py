@@ -139,22 +139,22 @@ with col2:
     if but1:
         if uploaded_file is None:
             with message_container:
-                st.error("Please make a prediction first!")
+                st.error("❗ Please make a prediction first!")
         else: 
             if predicted_label in st.session_state["veg_list"]:
                 with message_container:
-                    st.warning(f"{predicted_label} is already in list.")
+                    st.warning(f"⚠️ {predicted_label} is already in list.")
             else:
                 st.session_state["veg_list"].append(predicted_label)
                 with message_container:
-                    st.success(f"{predicted_label} added to list!")
+                    st.success(f"✔ {predicted_label} added to list!")
 
 with col3:
     but2 = st.button("View list")
     if but2:
         if len(st.session_state["veg_list"]) == 0:
             with message_container:
-                st.error("Please add at least 1 item!")
+                st.error("❗ Please add at least 1 item!")
         else: 
             show_list()   
 
@@ -163,12 +163,12 @@ with col4:
     if but3:
         if len(st.session_state["veg_list"]) == 0:
             with message_container:
-                st.error("Please add at least 1 item!")
+                st.error("❗ Please add at least 1 item!")
         else:
             found_recipes = search_for_recipe(st.session_state["veg_list"])
             if found_recipes is None:
                 with message_container:
-                    st.error("Sorry, there are no recipes matching your ingredients list.")
+                    st.error("😥 Sorry, there are no recipes matching your ingredients list.")
             else:
                 st.session_state["sorted_recipes"] = found_recipes
                 st.switch_page("pages/2_🍽_Recipes.py")
