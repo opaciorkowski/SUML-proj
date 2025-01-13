@@ -58,22 +58,16 @@ def search_for_recipe(veg_list):
 # Static Labels Mapping
 labels_mapping = {
     0: 'Bean',
-    1: 'Bitter_Gourd',
-    2: 'Bottle_Gourd',
-    3: 'Brinjal',
-    4: 'Broccoli',
-    5: 'Cabbage',
-    6: 'Tomato',
-    7: 'Capsicum',
-    8: 'Cauliflower',
-    9: 'Cucumber',
-    10: 'Papaya',
-    11: 'Potato',
-    12: 'Pumpkin',
-    13: 'Radish',
-    14: 'Carrot'
+    1: 'Cabbage',
+    2: 'Capsicum',
+    3: 'Carrot',
+    4: 'Cucumber',
+    5: 'Papaya',
+    6: 'Potato',
+    7: 'Pumpkin',
+    8: 'Radish',
+    9: 'Tomato'
 }
-
 # Load the saved model
 @st.cache_resource
 def load_vegetable_model():
