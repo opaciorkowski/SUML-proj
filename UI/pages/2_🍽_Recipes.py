@@ -47,9 +47,11 @@ def open_recipe():
     st.write("### Tags")
     st.write(", ".join(selected.tags))
     st.write("### Ingredients")
-    st.write("- Example Ingredient 1\n- Example Ingredient 2\n- Example Ingredient 3")
+    for ingredient in selected.ingredients:
+        st.write(f"- {ingredient}")
     st.write("### Instructions")
-    st.write("1. Step one\n2. Step two\n3. Step three")
+    for i, step in enumerate(selected.steps, start=1):
+        st.write(f"{i}. {step}")
     st.session_state["selected_recipe"] = None
 
 # Recipe layout
