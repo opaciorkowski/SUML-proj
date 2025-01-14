@@ -103,6 +103,75 @@ class Recipe:
         )
         recipes.append(rec6)
 
+        rec7 = Recipe(
+        "Bean Salad",
+        "A nutritious and colorful salad made with a variety of beans and fresh vegetables.",
+        "img/Bean-Salad-Recipe.jpg",  
+        ["Bean", "Capsicum", "Tomato"],
+        ["1 can mixed beans, drained and rinsed", "1 bell pepper, diced", "2 tomatoes, diced", 
+         "1/4 red onion, finely chopped", "2 tablespoons olive oil", "1 tablespoon lemon juice", 
+         "Salt and pepper to taste"],
+        ["In a large bowl, combine the beans, bell pepper, tomatoes, and onion.",
+         "In a small bowl, whisk together olive oil, lemon juice, salt, and pepper.",
+         "Pour the dressing over the salad and toss to combine. Serve chilled."]
+        )
+        recipes.append(rec7)
+
+        # New Recipe for Cabbage
+        rec8 = Recipe(
+            "Cabbage Stir-Fry",
+            "A quick stir-fry with cabbage and other vegetables for a healthy meal.",
+            "img/stir-fried-cabbage.jpg",  
+            ["Cabbage", "Carrot"],
+            ["1/2 head of cabbage, shredded", "1 carrot, julienned", "2 tablespoons soy sauce", 
+            "1 tablespoon sesame oil", "2 cloves garlic, minced"],
+            ["Heat sesame oil in a large skillet over medium heat.",
+            "Add garlic and sauté for 30 seconds. Add cabbage and carrot; stir-fry for 5-7 minutes until tender.",
+            "Add soy sauce and stir well. Cook for another minute before serving."]
+        )
+        recipes.append(rec8)
+
+        # New Recipe for Potato
+        rec9 = Recipe(
+            "Mashed Potatoes",
+            "Creamy mashed potatoes seasoned to perfection.",
+            "img/mashed-potatoes.jpg",  
+            ["Potato"],
+            ["4 large potatoes, peeled and chopped", "1/2 cup milk", "4 tablespoons butter", 
+            "Salt and pepper to taste"],
+            ["Boil potatoes in salted water until tender. Drain and return to pot.",
+            "Add milk and butter; mash until smooth. Season with salt and pepper before serving."]
+        )
+        recipes.append(rec9)
+
+        # New Recipe for Papaya
+        rec10 = Recipe(
+            "Papaya Salad",
+            "A refreshing salad made with ripe papaya and a tangy dressing.",
+            "img/Papaya-Salad.jpg",  
+            ["Papaya"],
+            ["1 ripe papaya, peeled and diced", "1 lime, juiced", 
+            "1 tablespoon honey", "Salt to taste"],
+            ["In a bowl, combine papaya cubes with lime juice and honey.",
+            "Toss gently to coat. Season with salt to taste before serving."]
+        )
+        recipes.append(rec10)
+
+        # New Recipe for Radish
+        rec11 = Recipe(
+            "Radish & Cucumber Salad",
+            "A light salad featuring radishes and cucumbers with a zesty dressing.",
+            "img/Cucumber-and-Radish-Salad.jpg",
+            ["Radish", "Cucumber"],
+            ["1 cup radishes, thinly sliced", "1 cucumber, sliced", 
+            "2 tablespoons vinegar", "1 tablespoon olive oil", 
+            "Salt and pepper to taste"],
+            ["In a bowl, combine radishes and cucumber slices.",
+            "In another bowl, whisk together vinegar, olive oil, salt, and pepper.",
+            "Pour dressing over the salad and toss gently before serving."]
+        )
+        recipes.append(rec11)
+
         return recipes
     
     def load_recipes():
